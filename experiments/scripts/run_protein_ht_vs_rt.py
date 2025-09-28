@@ -15,7 +15,6 @@ import numpy as np
 from pathlib import Path
 from torch.utils.data import DataLoader, random_split
 
-# Add src to path
 sys.path.append(str(Path(__file__).parent.parent.parent / "src"))
 
 from models import (

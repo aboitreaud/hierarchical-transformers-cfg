@@ -1,19 +1,19 @@
-# CFG-7L RT vs HT Experiment Configuration
-experiment_name: "cfg_7l_rt_ht"
-description: "Compare RT and HT on CFG-7L with cosine LR schedule"
+# HT-2L vs RT-4L Experiment Configuration
+experiment_name: "ht_2l_vs_rt_4l"
+description: "Compare 2-layer HT vs 4-layer RT on CFG-7L with cosine LR schedule"
 
 # CFG Configuration
 cfg:
   L: 7
   ns: [1, 3, 3, 3, 5, 5, 9, 10]
-  nr: [2, 2, 2, 2, 2, 2, 2]
-  T: [2, 2, 2, 2, 2, 4, 4]
+  nr: [2, 2, 2, 2, 2, 2, 2] 
+  T: [2, 2, 2, 2, 2, 4, 4] # sentence length = 512
 
 # Model Configurations
 models:
   rt:
     type: "GPT"
-    n_layer: 6
+    n_layer: 4
     n_head: 6
     head_size: 64
     dropout: 0.0
@@ -21,8 +21,8 @@ models:
     
   ht:
     type: "HierarchicalTransformer"
-    n_transformers: 4
-    n_layer: 4
+    n_transformers: 2 # children + their parents
+    n_layer: 2
     n_head: 6
     head_size: 64
     dropout: 0.0
@@ -51,7 +51,7 @@ training:
 
 # Logging
 logging:
-  project: "CFG-7L RT vs HT"
+  project: "HT-2L vs RT-4L"
   log_interval: 10
   save_checkpoints: true
   checkpoint_interval: 25

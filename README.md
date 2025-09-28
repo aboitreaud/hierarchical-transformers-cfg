@@ -1,4 +1,4 @@
-# CFG Project - Reproducible Research
+# Hierarchical Transformers for Context-Free Grammars
 
 This repository contains reproducible experiments comparing Regular Transformers (RT) and Hierarchical Transformers (HT) on Context-Free Grammar (CFG) tasks and protein structure prediction.
 
@@ -7,8 +7,11 @@ This repository contains reproducible experiments comparing Regular Transformers
 ### Option 1: Run All Experiments
 ```bash
 # Clone and setup
-git clone <repository-url>
-cd CFGProject-Reproducible
+git clone https://github.com/aboitreaud/hierarchical-transformers-cfg.git
+
+# Or clone via SSH
+# git clone git@github.com:aboitreaud/hierarchical-transformers-cfg.git
+cd hierarchical-transformers-cfg
 
 # Install dependencies
 pip install -r requirements.txt
@@ -19,8 +22,8 @@ pip install -r requirements.txt
 
 ### Option 2: Run Individual Experiments
 ```bash
-# CFG-7L RT vs HT comparison
-python experiments/scripts/run_cfg_7l_rt_ht.py
+# HT-2L vs RT-4L comparison
+python experiments/scripts/run_ht_2l_vs_rt_4l.py
 
 # HT-4L vs RT-8L parameter-matched comparison  
 python experiments/scripts/run_ht_4l_vs_rt_8l.py
@@ -42,7 +45,7 @@ The `scripts/reproduce_all.sh` script runs the following experiments:
 ### 1. RT and HT on CFG-7L
 This experiment compares RT and HT performance on 7-level CFG. We use cosine learning rate schedule from 6e-4 to 6e-5, training for 100 epochs with 5k sentences per epoch. The models are 6-layer RT vs 4-transformer HT.
 
-Script: `run_cfg_7l_rt_ht.py`
+Script: `run_ht_2l_vs_rt_4l.py`
 
 ### 2. HT-4L vs RT-8L
 This is parameter-matched comparison of hierarchical vs depth. We compare 4-layer HT vs 8-layer RT with similar parameter counts to see which architecture is more efficient.
@@ -67,7 +70,7 @@ Script: `run_protein_ht_vs_rt.py`
 ## Project Structure
 
 ```
-CFGProject-Reproducible/
+hierarchical-transformers-cfg/
 ├── src/                          # Source code
 │   ├── models/                   # Model implementations
 │   │   ├── cfg.py               # Context-Free Grammar implementation
@@ -131,8 +134,8 @@ This model has multiple transformer levels that correspond to CFG hierarchy. It 
 Each experiment uses YAML configuration files in `experiments/configs/`:
 
 ```yaml
-# Example: cfg_7l_rt_ht.yaml
-experiment_name: "cfg_7l_rt_ht"
+# Example: ht_2l_vs_rt_4l.yaml
+experiment_name: "ht_2l_vs_rt_4l"
 cfg:
   L: 7  # CFG depth
   ns: [1, 3, 3, 3, 5, 5, 9, 10]  # Symbols per level

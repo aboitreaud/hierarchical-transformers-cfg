@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CFG-7L RT vs HT Experiment
+CFG-7L RT-4L vs HT-2L Experiment
 Runs RT and HT on CFG-7L with cosine LR 6e-4→6e-5, 100 epochs, fresh 5k sentences/epoch
 """
 
@@ -11,7 +11,6 @@ import torch
 import numpy as np
 from pathlib import Path
 
-# Add src to path
 sys.path.append(str(Path(__file__).parent.parent.parent / "src"))
 
 from models import CFG, GPT, HierarchicalTransformer, GPTConfig
@@ -51,7 +50,7 @@ def create_model(model_config, cfg, sentence_length):
 
 
 def run_experiment(config_path):
-    """Run the CFG-7L RT vs HT experiment"""
+    """Run the HT-2L vs RT-4L experiment"""
     config = load_config(config_path)
     
     # Create CFG
@@ -158,7 +157,7 @@ def run_experiment(config_path):
         
         # Save checkpoint if requested
         if config['logging'].get('save_checkpoints', False):
-            checkpoint_dir = Path("experiments/results/cfg_7l_rt_ht/checkpoints")
+            checkpoint_dir = Path("experiments/results/ht_2l_vs_rt_4l/checkpoints")
             checkpoint_dir.mkdir(parents=True, exist_ok=True)
             torch.save(model.state_dict(), checkpoint_dir / f"{model_name}_final.pt")
     
@@ -174,5 +173,5 @@ def run_experiment(config_path):
 
 
 if __name__ == "__main__":
-    config_path = Path(__file__).parent.parent / "configs" / "cfg_7l_rt_ht.yaml"
+    config_path = Path(__file__).parent.parent / "configs" / "ht_2l_vs_rt_4l.yaml"
     results = run_experiment(config_path)

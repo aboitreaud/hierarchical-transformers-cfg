@@ -11,7 +11,6 @@ import torch
 import numpy as np
 from pathlib import Path
 
-# Add src to path
 sys.path.append(str(Path(__file__).parent.parent.parent / "src"))
 
 from models import CFG, GPT, HierarchicalTransformer, GPTConfig

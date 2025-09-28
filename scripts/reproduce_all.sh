@@ -30,7 +30,7 @@ else
 fi
 
 # Create results directories
-mkdir -p experiments/results/{cfg_7l_rt_ht,ht_4l_vs_rt_8l,depth_sweep,ht_binary_vs_rt_cfg9l,protein_ht_vs_rt}
+mkdir -p experiments/results/{ht_2l_vs_rt_4l,ht_4l_vs_rt_8l,depth_sweep,ht_binary_vs_rt_cfg9l,protein_ht_vs_rt}
 
 echo ""
 echo "Starting experiments..."
@@ -43,9 +43,9 @@ echo "Experiment 1: RT and HT on CFG-7L"
 echo "Cosine LR 6e-4→6e-5, 100 epochs, 5k sentences/epoch"
 echo "=========================================="
 cd experiments/scripts
-python run_cfg_7l_rt_ht.py
+python run_ht_2l_vs_rt_4l.py
 cd ../..
-echo "✓ CFG-7L RT vs HT experiment completed"
+echo "✓ HT-2L vs RT-4L experiment completed"
 echo ""
 
 # Experiment 2: HT-4L vs RT-8L
@@ -107,7 +107,7 @@ echo "ALL EXPERIMENTS COMPLETED"
 echo "=========================================="
 echo ""
 echo "Results have been saved to:"
-echo "  - experiments/results/cfg_7l_rt_ht/"
+echo "  - experiments/results/ht_2l_vs_rt_4l/"
 echo "  - experiments/results/ht_4l_vs_rt_8l/"
 echo "  - experiments/results/depth_sweep/"
 echo "  - experiments/results/ht_binary_vs_rt_cfg9l/"
@@ -116,7 +116,7 @@ echo ""
 echo "If using Weights & Biases, check your dashboard for detailed logs and metrics."
 echo ""
 echo "To run individual experiments:"
-echo "  python experiments/scripts/run_cfg_7l_rt_ht.py"
+echo "  python experiments/scripts/run_ht_2l_vs_rt_4l.py"
 echo "  python experiments/scripts/run_ht_4l_vs_rt_8l.py"
 echo "  python experiments/scripts/run_depth_sweep.py"
 echo "  python experiments/scripts/run_ht_binary_vs_rt_cfg9l.py"

@@ -65,8 +65,8 @@ fi
 # Create necessary directories
 echo ""
 echo "Creating directory structure..."
-mkdir -p experiments/results/{cfg_7l_rt_ht,ht_4l_vs_rt_8l,depth_sweep,ht_binary_vs_rt_cfg9l,protein_ht_vs_rt}
-mkdir -p experiments/results/{cfg_7l_rt_ht,ht_4l_vs_rt_8l,depth_sweep,ht_binary_vs_rt_cfg9l,protein_ht_vs_rt}/checkpoints
+mkdir -p experiments/results/{ht_2l_vs_rt_4l,ht_4l_vs_rt_8l,depth_sweep,ht_binary_vs_rt_cfg9l,protein_ht_vs_rt}
+mkdir -p experiments/results/{ht_2l_vs_rt_4l,ht_4l_vs_rt_8l,depth_sweep,ht_binary_vs_rt_cfg9l,protein_ht_vs_rt}/checkpoints
 
 # Make scripts executable
 chmod +x scripts/*.sh
@@ -80,6 +80,6 @@ echo "Next steps:"
 echo "1. Configure W&B (optional): wandb login"
 echo "2. Run all experiments: ./scripts/reproduce_all.sh"
 echo "3. Or run individual experiments:"
-echo "   python experiments/scripts/run_cfg_7l_rt_ht.py"
+echo "   python experiments/scripts/run_ht_2l_vs_rt_4l.py"
 echo ""
 echo "For more information, see README.md"
