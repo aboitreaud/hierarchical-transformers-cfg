@@ -1,0 +1,61 @@
+# CFG-7L RT vs HT Experiment Configuration
+experiment_name: "cfg_7l_rt_ht"
+description: "Compare RT and HT on CFG-7L with cosine LR schedule"
+
+# CFG Configuration
+cfg:
+  L: 7
+  ns: [1, 3, 3, 3, 5, 5, 9, 10]
+  nr: [2, 2, 2, 2, 2, 2, 2]
+  T: [2, 2, 2, 2, 2, 4, 4]
+
+# Model Configurations
+models:
+  rt:
+    type: "GPT"
+    n_layer: 6
+    n_head: 6
+    head_size: 64
+    dropout: 0.0
+    bias: false
+    
+  ht:
+    type: "HierarchicalTransformer"
+    n_transformers: 4
+    n_layer: 4
+    n_head: 6
+    head_size: 64
+    dropout: 0.0
+    bias: false
+
+# Training Configuration
+training:
+  num_epochs: 100
+  batch_size: 100
+  batches_per_epoch: 50
+  sentences_per_epoch: 5000  # batch_size * batches_per_epoch
+  
+  # Cosine LR Schedule
+  max_lr: 6e-4
+  min_lr: 6e-5
+  
+  # Optimizer
+  weight_decay: 1e-1
+  beta1: 0.9
+  beta2: 0.95
+  
+  # Evaluation
+  eval_iters: 100
+  quality_metric_iters: 100
+  eval_interval: 10
+
+# Logging
+logging:
+  project: "CFG-7L RT vs HT"
+  log_interval: 10
+  save_checkpoints: true
+  checkpoint_interval: 25
+
+# Hardware
+device: "cuda"
+use_wandb: true

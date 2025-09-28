@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Experiment outputs
+experiments/results/
+wandb/
+*.log
+
+# Model files
+*.pt
+*.pth
+*.ckpt
+
+# Data files
+*.pkl
+*.pickle
+protein_dataset.pkl
+
+# Temporary files
+*.tmp
+output.txt
+
+# OS files
+.DS_Store
+Thumbs.db

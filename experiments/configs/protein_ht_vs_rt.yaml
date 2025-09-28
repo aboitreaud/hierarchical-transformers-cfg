@@ -1,0 +1,69 @@
+# Protein HT vs RT with Kabsch-MSE Experiment
+experiment_name: "protein_ht_vs_rt"
+description: "Compare Hierarchical vs Regular Transformer on protein structure prediction with Kabsch-MSE loss"
+
+# Dataset Configuration
+dataset:
+  name: "protein_dataset"
+  train_test_ratio: 0.8
+  batch_size: 1  # Keep at 1 due to variable sequence lengths
+  shuffle: true
+
+# Model Configurations
+models:
+  protein_ht:
+    type: "ProteinHierarchicalTransformer"
+    atom_vocab_size: 36  # periodic_table_elements
+    residue_vocab_size: 20  # amino_acids
+    atom_block_size: 2000
+    residue_block_size: 100
+    n_layer: 6
+    n_head: 6
+    head_size: 64
+    dropout: 0.0
+    bias: false
+    
+  protein_rt:
+    type: "RegularTransformer"
+    atom_vocab_size: 36
+    residue_vocab_size: 20
+    atom_block_size: 2000
+    residue_block_size: 100
+    n_layer: 6
+    n_head: 6
+    head_size: 64
+    dropout: 0.0
+    bias: false
+
+# Training Configuration
+training:
+  num_epochs: 1500
+  
+  # Cosine LR Schedule
+  max_lr: 5e-6
+  min_lr: 5e-10  # max_lr / 10000
+  
+  # Optimizer
+  weight_decay: 1e-1
+  beta1: 0.9
+  beta2: 0.95
+  grad_clip: 1.0
+  
+  # Loss function
+  loss_function: "KabschMSELoss"
+
+# Logging
+logging:
+  project: "Protein Structure Prediction"
+  log_interval: 50
+  save_checkpoints: true
+  checkpoint_interval: 100
+
+# Hardware
+device: "cuda"
+use_wandb: true
+
+# Data paths (to be set during execution)
+data_paths:
+  protein_dataset: "protein_dataset.pkl"
+  results_dir: "experiments/results/protein_ht_vs_rt"

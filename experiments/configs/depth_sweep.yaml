@@ -1,0 +1,98 @@
+# Depth Sweep Experiment Configuration
+experiment_name: "depth_sweep"
+description: "Transformer Accuracy vs CFG Depth sweep experiment"
+
+# CFG Configurations for different depths
+cfg_depths: [3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+cfg_configs:
+  3:
+    L: 3
+    ns: [1, 3, 9, 10]
+    nr: [2, 2, 2]
+    T: [8, 8, 4]
+  4:
+    L: 4
+    ns: [1, 3, 5, 9, 10]
+    nr: [2, 2, 2, 2]
+    T: [2, 8, 8, 4]
+  5:
+    L: 5
+    ns: [1, 3, 3, 5, 9, 10]
+    nr: [2, 2, 2, 2, 2]
+    T: [2, 2, 8, 4, 4]
+  6:
+    L: 6
+    ns: [1, 3, 3, 5, 5, 9, 10]
+    nr: [2, 2, 2, 2, 2, 2]
+    T: [2, 2, 2, 4, 4, 4]
+  7:
+    L: 7
+    ns: [1, 3, 3, 3, 5, 5, 9, 10]
+    nr: [2, 2, 2, 2, 2, 2, 2]
+    T: [2, 2, 2, 2, 2, 4, 4]
+  8:
+    L: 8
+    ns: [1, 3, 3, 3, 5, 5, 5, 9, 10]
+    nr: [2, 2, 2, 2, 2, 2, 2, 2]
+    T: [2, 2, 2, 2, 2, 2, 2, 4]
+  9:
+    L: 9
+    ns: [1, 3, 3, 3, 5, 5, 5, 9, 9, 10]
+    nr: [2, 2, 2, 2, 2, 2, 2, 2, 2]
+    T: [1, 2, 2, 2, 2, 2, 2, 2, 4]
+  10:
+    L: 10
+    ns: [1, 3, 3, 3, 5, 5, 5, 9, 9, 9, 10]
+    nr: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+    T: [1, 1, 2, 2, 2, 2, 2, 2, 2, 4]
+  11:
+    L: 11
+    ns: [1, 3, 3, 3, 3, 5, 5, 5, 9, 9, 9, 10]
+    nr: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+    T: [1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 4]
+
+# Model Configuration (same for all depths)
+model:
+  type: "GPT"
+  n_layer: 6
+  n_head: 6
+  head_size: 64
+  dropout: 0.0
+  bias: false
+
+# Training Configuration
+training:
+  num_epochs: 100
+  batch_size: 100
+  batches_per_epoch: 50
+  
+  # Cosine LR Schedule
+  max_lr: 6e-4
+  min_lr: 6e-5
+  
+  # Optimizer
+  weight_decay: 1e-1
+  beta1: 0.9
+  beta2: 0.95
+  
+  # Evaluation
+  eval_iters: 100
+  quality_metric_iters: 100
+  eval_interval: 10
+
+# Heuristic Analysis
+heuristic:
+  enabled: true
+  chunk_size: 250
+  budget_range: [100, 1000, 3000, 5000, 10000]
+
+# Logging
+logging:
+  project: "Depth Sweep Analysis"
+  log_interval: 10
+  save_results: true
+
+# Hardware
+device: "cuda"
+use_wandb: true

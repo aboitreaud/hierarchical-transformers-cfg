@@ -1,0 +1,59 @@
+# HT-Binary vs RT on CFG-9L Experiment
+experiment_name: "ht_binary_vs_rt_cfg9l"
+description: "Compare binary HT vs RT on CFG-9L"
+
+# CFG Configuration (CFG-9L)
+cfg:
+  L: 9
+  ns: [1, 3, 3, 3, 5, 5, 5, 9, 9, 10]
+  nr: [2, 2, 2, 2, 2, 2, 2, 2, 2]
+  T: [1, 2, 2, 2, 2, 2, 2, 2, 4]
+
+# Model Configurations
+models:
+  ht_binary:
+    type: "HierarchicalTransformer"
+    n_transformers: 2  # Binary hierarchy
+    n_layer: 4
+    n_head: 6
+    head_size: 64
+    dropout: 0.0
+    bias: false
+    
+  rt:
+    type: "GPT"
+    n_layer: 6
+    n_head: 6
+    head_size: 64
+    dropout: 0.0
+    bias: false
+
+# Training Configuration
+training:
+  num_epochs: 100
+  batch_size: 100
+  batches_per_epoch: 50
+  
+  # Cosine LR Schedule
+  max_lr: 6e-4
+  min_lr: 6e-5
+  
+  # Optimizer
+  weight_decay: 1e-1
+  beta1: 0.9
+  beta2: 0.95
+  
+  # Evaluation
+  eval_iters: 100
+  quality_metric_iters: 100
+  eval_interval: 10
+
+# Logging
+logging:
+  project: "HT-Binary vs RT CFG-9L"
+  log_interval: 10
+  save_checkpoints: true
+
+# Hardware
+device: "cuda"
+use_wandb: true
