@@ -14,7 +14,7 @@ models:
   protein_ht:
     type: "ProteinHierarchicalTransformer"
     atom_vocab_size: 36  # periodic_table_elements
-    residue_vocab_size: 20  # amino_acids
+    residue_vocab_size: 22  # amino_acids (20 standard + SEC + PYL)
     atom_block_size: 2000
     residue_block_size: 100
     n_layer: 6

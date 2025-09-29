@@ -179,6 +179,8 @@ batch_size: 50  # Instead of 100
 **Missing Protein Dataset**
 ```bash
 # The protein experiment requires protein_dataset.pkl
+# Create it using the data preparation script:
+python scripts/prepare_protein_dataset.py
 # Skip with: python run_protein_ht_vs_rt.py --skip-if-missing
 ```
 
@@ -188,47 +190,6 @@ batch_size: 50  # Instead of 100
 num_epochs: 10  # Instead of 100
 ```
 
-### Performance Tips
-- Use CUDA if available (gives 10-100x speedup)
-- Monitor GPU memory usage during training
-- Use mixed precision training for larger models
-- Adjust batch sizes based on available memory
-
-## Citation
-
-If you use this code in your research, please cite:
-
-```bibtex
-@article{cfg-transformers-2024,
-  title={Hierarchical vs Regular Transformers on Context-Free Grammar Tasks},
-  author={[Author Names]},
-  journal={[Journal/Conference]},
-  year={2024}
-}
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Open a Pull Request
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Original CFG implementation and experimental design
-- PyTorch team for the deep learning framework
-- Weights and Biases for experiment tracking
-- Research community for hierarchical transformer architectures
-
-## Support
-
-For questions or issues:
-1. Check the [Issues](../../issues) page
-2. Review the troubleshooting section above
-3. Create a new issue with detailed information

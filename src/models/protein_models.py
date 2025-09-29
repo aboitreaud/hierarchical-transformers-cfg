@@ -4,6 +4,7 @@ import math
 from dataclasses import dataclass, field
 from jaxtyping import jaxtyped, Float
 from torch import Tensor
+from torch.utils.data import Dataset
 
 
 # Protein vocabulary
@@ -13,7 +14,29 @@ periodic_table_elements = [
 ]
 
 amino_acids = [
-    'A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V'
+    "ALA",  # Alanine
+    "ARG",  # Arginine
+    "ASN",  # Asparagine
+    "ASP",  # Aspartic acid
+    "CYS",  # Cysteine
+    "GLU",  # Glutamic acid
+    "GLN",  # Glutamine
+    "GLY",  # Glycine
+    "HIS",  # Histidine
+    "ILE",  # Isoleucine
+    "LEU",  # Leucine
+    "LYS",  # Lysine
+    "MET",  # Methionine
+    "PHE",  # Phenylalanine
+    "PRO",  # Proline
+    "SER",  # Serine
+    "THR",  # Threonine
+    "TRP",  # Tryptophan
+    "TYR",  # Tyrosine
+    "VAL",  # Valine
+    # Additional residues found in some proteins
+    "SEC",  # Selenocysteine
+    "PYL",  # Pyrrolysine
 ]
 
 
@@ -298,3 +321,20 @@ def kabsch_alignment(mobile_pts, target_pts):
     mobile_aligned = P_rotated + translation_vector
 
     return mobile_aligned
+
+
+class ProteinDataset(Dataset):
+    """Dataset class for protein structure prediction"""
+    def __init__(self, protein_data):
+        self.protein_data = protein_data  # protein_data is a list of dicts
+
+    def __len__(self):
+        return len(self.protein_data)
+
+    def __getitem__(self, idx):
+        protein = self.protein_data[idx]
+        atom_sequence = protein["atom_sequence"]
+        amino_acid_sequence = protein["amino_acid_sequence"]
+        coordinates = protein["coordinates"].float()  # tensor of (x, y, z) coordinates
+        counts = protein["counts"]
+        return (atom_sequence, amino_acid_sequence, counts), coordinates

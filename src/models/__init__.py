@@ -5,6 +5,7 @@ from .protein_models import (
     RegularTransformer, 
     ProtConfig, 
     KabschMSELoss,
+    ProteinDataset,
     periodic_table_elements,
     amino_acids
 )
@@ -18,6 +19,7 @@ __all__ = [
     'RegularTransformer', 
     'ProtConfig',
     'KabschMSELoss',
+    'ProteinDataset',
     'periodic_table_elements',
     'amino_acids'
 ]

@@ -88,16 +88,24 @@ echo "Protein structure prediction comparison"
 echo "=========================================="
 
 if [ -f "protein_dataset.pkl" ]; then
+    echo "Using existing protein dataset..."
     cd experiments/scripts
     python run_protein_ht_vs_rt.py
     cd ../..
     echo "✓ Protein HT vs RT experiment completed"
 else
-    echo "⚠ Protein dataset not found (protein_dataset.pkl)"
-    echo "  Skipping protein experiment. To run this experiment:"
-    echo "  1. Prepare protein dataset using data preparation scripts"
-    echo "  2. Place protein_dataset.pkl in the project root"
-    echo "  3. Run: python experiments/scripts/run_protein_ht_vs_rt.py"
+    echo "Protein dataset not found. Creating from atom3d..."
+    python scripts/prepare_protein_dataset.py
+    if [ -f "protein_dataset.pkl" ]; then
+        cd experiments/scripts
+        python run_protein_ht_vs_rt.py
+        cd ../..
+        echo "✓ Protein HT vs RT experiment completed"
+    else
+        echo "⚠ Failed to create protein dataset"
+        echo "  To manually prepare dataset, run:"
+        echo "    python scripts/prepare_protein_dataset.py"
+    fi
 fi
 echo ""
 

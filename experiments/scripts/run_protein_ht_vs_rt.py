@@ -77,7 +77,9 @@ def load_protein_dataset(dataset_path, train_test_ratio=0.8):
         return train_dataset, val_dataset
     except FileNotFoundError:
         print(f"Error: Protein dataset not found at {dataset_path}")
-        print("Please ensure the protein dataset is available or create it using the data preparation script.")
+        print("Please create the dataset using:")
+        print("    python scripts/prepare_protein_dataset.py")
+        print("This will download and process the atom3d MSP dataset.")
         return None, None
 
 
